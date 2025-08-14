@@ -1,0 +1,34 @@
+ (cond
+           (= esporte "basquete")
+           (cond
+             (= tipo-aposta "resultado-correto")
+             (if (and event-id palpite)
+               (let [response (resultado-correto-nba event-id palpite)]
+                 {:status 200 :body (json/generate-string response)})
+               {:status 400 :body "Parâmetros 'event-id' e 'palpite' são obrigatórios."})
+
+             (= tipo-aposta "over-under")
+             (if (and event-id linha)
+               (let [response (prever-over-under event-id linha)]
+                 {:status 200 :body response})
+               {:status 400 :body "Parâmetros 'event-id' e 'linha' são obrigatórios."})
+
+             :else
+             {:status 400 :body "Tipo de aposta inválido."})
+
+           (= esporte "futebol")
+           (cond
+             (= tipo-aposta "resultado-correto")
+             (if (and event-id palpite)
+               (let [response (resultado-correto-nba event-id palpite)]
+                 {:status 200 :body (json/generate-string response)})
+               {:status 400 :body "Parâmetros 'event-id' e 'palpite' são obrigatórios."})
+
+             (= tipo-aposta "over-under")
+             (if (and event-id linha)
+               (let [response (prever-over-under event-id linha)]
+                 {:status 200 :body response})
+               {:status 400 :body "Parâmetros 'event-id' e 'linha' são obrigatórios."})
+
+             :else
+             {:status 400 :body "Tipo de aposta inválido."}))
